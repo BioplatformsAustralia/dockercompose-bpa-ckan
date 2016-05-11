@@ -1,0 +1,35 @@
+
+db:
+  image: mdillon/postgis:9.5
+  ports:
+    - 5432
+  environment:
+    - POSTGRES_USER=ckan
+    - POSTGRES_PASSWORD=ckan
+
+solr:
+  image: solr:5.5
+  ports:
+    - 8983
+  volumes:
+    - ./_src/ckan/ckan/config/solr/schema.xml:/opt/solr/example/solr/ckan/conf/schema.xml
+
+datapusher:
+  build: datapusher/
+  ports:
+    - 8800
+
+ckan:
+  build: ckan/
+  ports:
+    - 5000
+    - 8080
+  links:
+    - db
+    - solr
+    - datapusher
+  command:
+    /docker-entrypoint.sh
+  volumes:
+    - ./ckan/custom_options.ini:/etc/ckan/default/custom_options.ini
+    - ./supervisor/conf.d:/etc/supervisor/conf.d

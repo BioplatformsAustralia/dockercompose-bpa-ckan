@@ -1,0 +1,11 @@
+syntax:glob
+.#*
+*.log
+*.swp
+*.swo
+*~
+*.pyc
+*.html~
+*.js~
+*.egg-info/
+virt*/
