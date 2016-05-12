@@ -4,6 +4,7 @@ MAINTAINER https://github.com/muccg/bpa-ckan-docker
 ENV PROJECT_NAME ckan
 ENV PROJECT_SOURCE https://github.com/ckan/ckan.git
 ENV CKAN_TAG=ckan-2.5.2
+ENV CKAN_HOME $VIRTUAL_ENV
 ENV DEPLOYMENT prod
 ENV PRODUCTION 1
 ENV DEBUG 0
@@ -11,9 +12,6 @@ ENV STATIC_ROOT /data/static
 ENV WRITABLE_DIRECTORY /data/scratch
 ENV MEDIA_ROOT /data/static/media
 ENV LOG_DIRECTORY /data/log
-
-ENV CKAN_HOME /usr/lib/ckan
-ENV BRANCH master
 
 RUN env | sort
 
@@ -38,8 +36,7 @@ RUN git clone --branch=stable    --depth 1 https://github.com/ckan/datapusher/  
 RUN git clone --branch=master    --depth 1 https://github.com/ckan/ckan-service-provider/     /project/ckan-service-provider/
 RUN git clone --branch=master    --depth 1 https://github.com/ckan/ckanapi/                   /project/ckanapi/
 
-RUN virtualenv $CKAN_HOME && \
-    mkdir -p $CKAN_HOME /project /var/www/storage && \
+RUN mkdir -p /project /var/www/storage && \
     chown -R www-data:www-data /var/www
 
 RUN $CKAN_HOME/bin/pip install -e /project/ckan-service-provider
