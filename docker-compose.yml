@@ -1,3 +1,21 @@
+# data only container pattern
+datadev:
+  image: muccg/debian8-base
+  volumes:
+    - ./data/dev:/data
+
+cache:
+  image: memcached:1.4
+
+nginx:
+  image: muccg/nginx-uwsgi:1.9
+  ports:
+    - "8443:443"
+    - "8080:80"
+  volumes:
+    - ./data/nginx:/data
+  links:
+    - uwsgi
 
 db:
   image: mdillon/postgis:9.5
@@ -10,26 +28,26 @@ db:
 solr:
   image: solr:5.5
   ports:
-    - 8983
+      - "8983:8983"
   volumes:
-    - ./_src/ckan/ckan/config/solr/schema.xml:/opt/solr/example/solr/ckan/conf/schema.xml
+      - ./solr/ckan:/opt/solr/server/solr/ckan
 
-datapusher:
-  build: datapusher/
-  ports:
-    - 8800
+#datapusher:
+#  build: datapusher/
+#  ports:
+#    - 8800
 
-ckan:
+uwsgi:
   build: ckan/
+  environment:
+    - DBUSER=ckan
+    - WAIT_FOR_DB=1
+    - WAIT_FOR_CACHE=1
   ports:
-    - 5000
-    - 8080
+    - 9100
+    - 9101
   links:
     - db
     - solr
-    - datapusher
-  command:
-    /docker-entrypoint.sh
-  volumes:
-    - ./ckan/custom_options.ini:/etc/ckan/default/custom_options.ini
-    - ./supervisor/conf.d:/etc/supervisor/conf.d
+    - cache
+#    - datapusher
