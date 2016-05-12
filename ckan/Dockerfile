@@ -1,12 +1,15 @@
 FROM muccg/python-base:debian8-2.7
 MAINTAINER https://github.com/muccg/bpa-ckan-docker
 
+#At build time changing these args allow us to use a local devpi mirror
+# Unchanged, these defaults allow pip to behave as noremal
+ARG ARG_PIP_OPTS="--no-cache-dir"
+ARG ARG_PIP_INDEX_URL="https://pypi.python.org/simple"
+ARG ARG_PIP_TRUSTED_HOST="127.0.0.1"
+
 ENV PROJECT_NAME ckan
 ENV CKAN_HOME $VIRTUAL_ENV
-ENV CKAN_VERSION ckan-2.5.2
 ENV DATAPUSHER_VERSION 0.0.8
-ENV CKAN_SERVICE_PROVIDER_VERSION 0.0.5
-ENV CKAN_API_VERSION ckanapi-3.5
 ENV DEPLOYMENT prod
 ENV PRODUCTION 1
 ENV DEBUG 0
@@ -18,12 +21,13 @@ ENV LOG_DIRECTORY /data/log
 RUN env | sort
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
+  build-essential \
+  curl \
+  git \
   libpcre3 \
   libgeos-c1 \
   libpq5 \
   libxml2 \
-  git \
-  build-essential \
   libpcre3-dev \
   libpq-dev \
   libssl-dev \
@@ -33,18 +37,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN git clone --branch=$CKAN_VERSION --depth 1 https://github.com/ckan/ckan /project/ckan/
-RUN git clone --branch=$DATAPUSHER_VERSION --depth 1 https://github.com/ckan/datapusher/ /project/datapusher/
-RUN git clone --branch=$CKAN_SERVICE_PROVIDER_VERSION --depth 1 https://github.com/ckan/ckan-service-provider/ /project/ckan-service-provider/
-RUN git clone --branch=$CKAN_API_VERSION --depth 1 https://github.com/ckan/ckanapi/ /project/ckanapi/
-
-RUN mkdir -p /project /var/www/storage && \
+RUN mkdir -p /etc/ckan /var/www/storage && \
     chown -R www-data:www-data /var/www
 
-RUN $CKAN_HOME/bin/pip install -e /project/ckan-service-provider
-RUN $CKAN_HOME/bin/pip install -r /project/ckan/requirements.txt
-RUN $CKAN_HOME/bin/pip install -e /project/ckan
-RUN $CKAN_HOME/bin/pip install -e /project/ckanapi
-RUN $CKAN_HOME/bin/pip install -r /project/datapusher/requirements.txt
+RUN NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade pip==8.1.2
 
-ENTRYPOINT ["/bin/sh"]
+# http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html
+COPY requirements.txt /etc/ckan/requirements.txt
+RUN NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/ckan/requirements.txt
+
+RUN curl -o /etc/ckan/ckan-requirements.txt https://raw.githubusercontent.com/ckan/ckan/ckan-2.5.2/requirements.txt \
+  && NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/ckan/ckan-requirements.txt
+
+COPY etc/ckan /etc/ckan/
+COPY etc/uwsgi /etc/uwsgi/
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN curl -o /etc/ckan/default/who.ini https://raw.githubusercontent.com/ckan/ckan/ckan-2.5.2/ckan/config/who.ini
+
+EXPOSE 9100 9101
+VOLUME ["/var/www/storage"]
+
+# entrypoint shell script that by default starts uwsgi
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["uwsgi"]
