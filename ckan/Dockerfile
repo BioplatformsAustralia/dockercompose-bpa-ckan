@@ -2,9 +2,11 @@ FROM muccg/python-base:debian8-2.7
 MAINTAINER https://github.com/muccg/bpa-ckan-docker
 
 ENV PROJECT_NAME ckan
-ENV PROJECT_SOURCE https://github.com/ckan/ckan.git
-ENV CKAN_TAG=ckan-2.5.2
 ENV CKAN_HOME $VIRTUAL_ENV
+ENV CKAN_VERSION ckan-2.5.2
+ENV DATAPUSHER_VERSION 0.0.8
+ENV CKAN_SERVICE_PROVIDER_VERSION 0.0.5
+ENV CKAN_API_VERSION ckanapi-3.5
 ENV DEPLOYMENT prod
 ENV PRODUCTION 1
 ENV DEBUG 0
@@ -31,10 +33,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
   zlib1g-dev \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN git clone --branch=$CKAN_TAG --depth 1 https://github.com/ckan/ckan                       /project/ckan/
-RUN git clone --branch=stable    --depth 1 https://github.com/ckan/datapusher/                /project/datapusher/
-RUN git clone --branch=master    --depth 1 https://github.com/ckan/ckan-service-provider/     /project/ckan-service-provider/
-RUN git clone --branch=master    --depth 1 https://github.com/ckan/ckanapi/                   /project/ckanapi/
+RUN git clone --branch=$CKAN_VERSION --depth 1 https://github.com/ckan/ckan /project/ckan/
+RUN git clone --branch=$DATAPUSHER_VERSION --depth 1 https://github.com/ckan/datapusher/ /project/datapusher/
+RUN git clone --branch=$CKAN_SERVICE_PROVIDER_VERSION --depth 1 https://github.com/ckan/ckan-service-provider/ /project/ckan-service-provider/
+RUN git clone --branch=$CKAN_API_VERSION --depth 1 https://github.com/ckan/ckanapi/ /project/ckanapi/
 
 RUN mkdir -p /project /var/www/storage && \
     chown -R www-data:www-data /var/www
