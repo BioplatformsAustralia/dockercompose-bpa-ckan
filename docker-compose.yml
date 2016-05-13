@@ -42,6 +42,7 @@ uwsgi:
   environment:
     - DBUSER=ckan
     - WAIT_FOR_DB=1
+    - WAIT_FOR_SOLR=1
     - WAIT_FOR_CACHE=1
   ports:
     - 9100
