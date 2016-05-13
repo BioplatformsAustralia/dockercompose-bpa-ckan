@@ -26,6 +26,9 @@ function wait_for_services {
     if [[ "$WAIT_FOR_CACHE" ]] ; then
         dockerwait $CACHESERVER $CACHEPORT
     fi
+    if [[ "$WAIT_FOR_SOLR" ]] ; then
+        dockerwait $SOLRSERVER $SOLRPORT
+    fi
     if [[ "$WAIT_FOR_HOST_PORT" ]]; then
         dockerwait $DOCKER_ROUTE $WAIT_FOR_HOST_PORT
     fi
@@ -45,6 +48,9 @@ function defaults {
     : ${CACHEPORT:="11211"}
     : ${MEMCACHE:="${CACHESERVER}:${CACHEPORT}"}
 
+    : ${SOLRSERVER:="solr"}
+    : ${SOLRPORT:="8983"}
+
     # currently supported environment variables
     #'sqlalchemy.url': 'CKAN_SQLALCHEMY_URL',
     : ${CKAN_SQLALCHEMY_URL="postgres://${DBUSER}:${DBPASS}@${DBSERVER}/${DBNAME}"}
@@ -54,7 +60,7 @@ function defaults {
     : ${CKAN_SOLR_URL="http://solr:8983/solr/ckan"}
     #'ckan.site_id': 'CKAN_SITE_ID',
     #'ckan.site_url': 'CKAN_SITE_URL',
-    : ${CKAN_SITE_URL:="https://localhost:8442/app/"}
+    : ${CKAN_SITE_URL:="https://localhost:8443/app/"}
     #'ckan.storage_path': 'CKAN_STORAGE_PATH',
     #'ckan.datapusher.url': 'CKAN_DATAPUSHER_URL',
     #'smtp.server': 'CKAN_SMTP_SERVER',
@@ -73,6 +79,22 @@ defaults
 env | grep -iv PASS | sort
 wait_for_services
 
+# Some test code to dump out how ckan talks to solr
+#(tcpdump -n -i eth0 port 8983 -t -A 2>&1 &)
+
+# POST /solr/ckan/select HTTP/1.1
+# Host: solr:8983
+# Accept-Encoding: identity
+# Content-Length: 57
+# Content-Type: application/x-www-form-urlencoded; charset=utf-8
+# 
+# q=%2A%3A%2A&rows=1&fl=%2A%2Cscore&version=2.2&wt=standard
+
+# GET /solr/ckan/admin/file/?file=schema.xml HTTP/1.1
+# Accept-Encoding: identity
+# Host: solr:8983
+# Connection: close
+# User-Agent: Python-urllib/2.7
 
 # uwsgi entrypoint
 if [ "$1" = 'uwsgi' ]; then
