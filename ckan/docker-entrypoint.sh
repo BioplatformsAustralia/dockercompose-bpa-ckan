@@ -52,6 +52,8 @@ function defaults {
     : ${SOLRPORT:="8983"}
 
     # currently supported environment variables
+    # while these are useful, annoyingly they aren't respect when using paster
+    : ${CKAN_INI="/etc/ckan/default/ckan.ini"}
     #'sqlalchemy.url': 'CKAN_SQLALCHEMY_URL',
     : ${CKAN_SQLALCHEMY_URL="postgres://${DBUSER}:${DBPASS}@${DBSERVER}/${DBNAME}"}
     #'ckan.datastore.write_url': 'CKAN_DATASTORE_WRITE_URL',
@@ -70,7 +72,7 @@ function defaults {
     #'smtp.mail_from': 'CKAN_SMTP_MAIL_FROM'
 
     export DBSERVER DBPORT DBUSER DBNAME DBPASS MEMCACHE DOCKER_ROUTE
-    export CKAN_SITE_URL CKAN_SQLALCHEMY_URL CKAN_SOLR_URL
+    export CKAN_INI CKAN_SITE_URL CKAN_SQLALCHEMY_URL CKAN_SOLR_URL
 }
 
 
