@@ -48,8 +48,11 @@ COPY etc/uwsgi /etc/uwsgi/
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN curl -o /etc/ckan/default/who.ini https://raw.githubusercontent.com/ckan/ckan/ckan-2.5.2/ckan/config/who.ini
 
-#RUN apt-get update && apt-get install -y --no-install-recommends \
-#  tcpdump
+# Will remove thse, they are useful while poking around
+RUN apt-get update && apt-get install -y --no-install-recommends \
+  less \
+  tcpdump \
+  vim
 
 EXPOSE 9100 9101
 VOLUME ["/var/www/storage"]
