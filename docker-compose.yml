@@ -40,10 +40,8 @@ solr:
   volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
-#datapusher:
-#  build: datapusher/
-#  ports:
-#    - 8800
+datapusher:
+  build: datapusher/
 
 uwsgi:
   build: ckan/
