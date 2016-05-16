@@ -15,7 +15,7 @@ nginx:
   volumes:
     - ./data/nginx:/data
   links:
-    - uwsgi
+      - ckan:uwsgi
 
 datastore:
   image: mdillon/postgis:9.5
@@ -43,7 +43,7 @@ solr:
 datapusher:
   build: datapusher/
 
-uwsgi:
+ckan:
   build: ckan/
   environment:
     - DBUSER=ckan
