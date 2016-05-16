@@ -17,6 +17,14 @@ nginx:
   links:
     - uwsgi
 
+datastore:
+  image: mdillon/postgis:9.5
+  ports:
+    - 5432
+  environment:
+    - POSTGRES_USER=datastore
+    - POSTGRES_PASSWORD=datastore
+
 db:
   image: mdillon/postgis:9.5
   ports:
@@ -42,6 +50,7 @@ uwsgi:
   environment:
     - DBUSER=ckan
     - WAIT_FOR_DB=1
+    - WAIT_FOR_DATASTORE=1
     - WAIT_FOR_SOLR=1
     - WAIT_FOR_CACHE=1
   ports:
@@ -49,6 +58,7 @@ uwsgi:
     - 9101
   links:
     - db
+    - datastore
     - solr
     - cache
 #    - datapusher

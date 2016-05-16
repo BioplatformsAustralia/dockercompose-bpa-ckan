@@ -23,6 +23,9 @@ function wait_for_services {
     if [[ "$WAIT_FOR_DB" ]] ; then
         dockerwait $DBSERVER $DBPORT
     fi
+    if [[ "$WAIT_FOR_DATASTORE" ]] ; then
+        dockerwait $DATASTORE_DBSERVER $DATASTORE_DBPORT
+    fi
     if [[ "$WAIT_FOR_CACHE" ]] ; then
         dockerwait $CACHESERVER $CACHEPORT
     fi
@@ -42,6 +45,14 @@ function defaults {
     : ${DBNAME:="${DBUSER}"}
     : ${DBPASS:="${DBUSER}"}
 
+    : ${DATASTORE_DBSERVER:="datastore"}
+    : ${DATASTORE_DBPORT:="5432"}
+    : ${DATASTORE_DBUSER:="datastore"}
+    : ${DATASTORE_DBNAME:="${DATASTORE_DBUSER}"}
+    : ${DATASTORE_DBPASS:="${DATASTORE_DBUSER}"}
+    : ${DATASTORE_DB_READONLY_USER:="readonly"}
+    : ${DATASTORE_DB_READONLY_PASS:="${DATASTORE_DB_READONLY_USER}"}
+
     : ${DOCKER_ROUTE:=$(/sbin/ip route|awk '/default/ { print $3 }')}
 
     : ${CACHESERVER:="cache"}
@@ -58,6 +69,8 @@ function defaults {
     : ${CKAN_SQLALCHEMY_URL="postgres://${DBUSER}:${DBPASS}@${DBSERVER}/${DBNAME}"}
     #'ckan.datastore.write_url': 'CKAN_DATASTORE_WRITE_URL',
     #'ckan.datastore.read_url': 'CKAN_DATASTORE_READ_URL',
+    : ${CKAN_DATASTORE_WRITE_URL="postgres://${DATASTORE_DBUSER}:${DATASTORE_DBPASS}@${DATASTORE_DBSERVER}/${DATASTORE_DBNAME}"}
+    : ${CKAN_DATASTORE_READ_URL="postgres://${DATASTORE_DB_READONLY_USER}:${DATASTORE_DB_READONLY_PASS}@${DATASTORE_DBSERVER}/${DATASTORE_DBNAME}"}
     #'solr_url': 'CKAN_SOLR_URL',
     : ${CKAN_SOLR_URL="http://solr:8983/solr/ckan"}
     #'ckan.site_id': 'CKAN_SITE_ID',
@@ -72,7 +85,8 @@ function defaults {
     #'smtp.mail_from': 'CKAN_SMTP_MAIL_FROM'
 
     export DBSERVER DBPORT DBUSER DBNAME DBPASS MEMCACHE DOCKER_ROUTE
-    export CKAN_INI CKAN_SITE_URL CKAN_SQLALCHEMY_URL CKAN_SOLR_URL
+    export DATASTORE_DBSERVER DATASTORE_DBPORT DATASTORE_DBUSER DATASTORE_DBNAME DATASTORE_DBPASS
+    export CKAN_INI CKAN_SITE_URL CKAN_SQLALCHEMY_URL CKAN_DATASTORE_WRITE_URL CKAN_DATASTORE_READ_URL CKAN_SOLR_URL
 }
 
 

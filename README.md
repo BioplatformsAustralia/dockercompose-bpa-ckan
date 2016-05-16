@@ -15,3 +15,6 @@ Status:
  - paster db init
  - (note the db port above is dynamic, so that will not work as is)
  - SCRIPT_NAME not being respected, configured prefix middleware instead
+ - how to add readonly user to datastore postgresql
+   - postgres=# create user readonly with password 'readonly';
+ - paster sysadmin add admin
