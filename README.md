@@ -11,10 +11,13 @@ Status:
  - export CKAN_SITE_URL=https://localhost:8443/app/
  - export CKAN_SQLALCHEMY_URL=postgres://ckan:ckan@localhost:32768/ckan
  - export CKAN_SOLR_URL=http://localhost:8983/solr/ckan
+ - export CKAN_DATASTORE_WRITE_URL=postgres://datastore:datastore@localhost:32776/datastore
+ - export CKAN_DATASTORE_READ_URL=postgres://readonly:readonly@localhost:32776/datastore
  - ln -s ckan/config/deployment.ini_tmpl development.ini
  - paster db init
- - (note the db port above is dynamic, so that will not work as is)
+ - (note the db ports above are dynamic, so that will not work as is)
  - SCRIPT_NAME not being respected, configured prefix middleware instead
  - how to add readonly user to datastore postgresql
    - postgres=# create user readonly with password 'readonly';
+ - paster datastore set-permissions
  - paster sysadmin add admin
