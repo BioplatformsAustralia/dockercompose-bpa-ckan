@@ -1,6 +1,7 @@
 ckanserviceprovider==0.0.5
 ckan==2.5.2
 ckanapi==3.5
+ckantoolkit==0.0.2
 git+git://github.com/ckan/datapusher.git@0.0.8
 # local forks so we can tag them (no upstream releases)
 git+git://github.com/muccg/ckanext-pages.git@0.0.1

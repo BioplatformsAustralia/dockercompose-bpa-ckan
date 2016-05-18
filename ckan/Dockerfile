@@ -46,6 +46,9 @@ ENV PYTHON_PIP_VERSION 8.1.2
 # http://docs.ckan.org/en/latest/maintaining/installing/install-from-source.html
 RUN NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/ckan/requirements.txt
 
+RUN curl -o /etc/ckan/ckanext-spatial-requirements.txt https://raw.githubusercontent.com/muccg/ckanext-spatial/0.0.1/pip-requirements.txt \
+  && NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/ckan/ckanext-spatial-requirements.txt
+
 RUN curl -o /etc/ckan/ckan-requirements.txt https://raw.githubusercontent.com/ckan/ckan/ckan-2.5.2/requirements.txt \
   && NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/ckan/ckan-requirements.txt
 
