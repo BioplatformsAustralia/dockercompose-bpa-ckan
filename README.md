@@ -26,3 +26,4 @@ Status:
    - postgres=# create user readonly with password 'readonly';
  - paster datastore set-permissions
  - paster sysadmin add admin
+ - set up spatial extension: http://docs.ckan.org/projects/ckanext-spatial/en/latest/install.html
