@@ -11,8 +11,7 @@ git+git://github.com/muccg/ckanext-spatial.git@0.0.1
 git+git://github.com/muccg/ckanext-scheming.git@interim-1.0.1
 git+git://github.com/muccg/ckan-galleries.git@0.0.2
 git+git://github.com/muccg/ckanext-hierarchy.git@0.0.1
-# unversioned while hacking on this, fixme
-git+git://github.com/muccg/ckanext-bpatheme.git
+git+git://github.com/muccg/ckanext-bpatheme.git@0.0.1
 uWSGI==2.0.13
 uwsgitop
 testrepository

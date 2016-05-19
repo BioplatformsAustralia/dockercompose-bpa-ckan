@@ -27,3 +27,6 @@ Status:
  - paster datastore set-permissions
  - paster sysadmin add admin
  - set up spatial extension: http://docs.ckan.org/projects/ckanext-spatial/en/latest/install.html
+ - PGPASSWORD=ckan psql -h localhost -p $db_port -U ckan              
+   ckan=# ALTER VIEW geometry_columns OWNER TO ckan;
+   ckan=# ALTER TABLE spatial_ref_sys OWNER TO ckan;
