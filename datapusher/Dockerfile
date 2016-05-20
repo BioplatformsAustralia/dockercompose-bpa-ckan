@@ -34,12 +34,6 @@ RUN NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PI
 RUN curl -o /etc/datapusher/datapusher-requirements.txt https://raw.githubusercontent.com/ckan/datapusher/${DATAPUSHER_VERSION}/requirements.txt \
   && NO_PROXY=${ARG_PIP_TRUSTED_HOST} pip ${ARG_PIP_OPTS} --trusted-host ${ARG_PIP_TRUSTED_HOST} install -i ${ARG_PIP_INDEX_URL} --upgrade -r /etc/datapusher/datapusher-requirements.txt
 
-# Will remove thse, they are useful while poking around
-RUN apt-get update && apt-get install -y --no-install-recommends \
-  less \
-  tcpdump \
-  vim
-
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 9100 9101
