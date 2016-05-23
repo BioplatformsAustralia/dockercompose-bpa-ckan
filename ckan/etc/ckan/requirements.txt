@@ -1,5 +1,6 @@
 ckanserviceprovider==0.0.5
-ckan==2.5.2
+# the pypy tarball is missing some files, use git instead
+git+git://github.com/ckan/ckan.git@ckan-2.5.2
 ckanapi==3.5
 ckantoolkit==0.0.2
 git+git://github.com/ckan/datapusher.git@0.0.8
