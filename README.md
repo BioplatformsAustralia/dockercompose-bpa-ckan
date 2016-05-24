@@ -2,7 +2,6 @@
 
 Under active development, not yet for production use.
 
-
 Status:
 
  - fire up docker stack using docker-compose, wait, until ckan is up and running, and then:

@@ -1,4 +1,0 @@
-psycopg2==2.4.5
-git+git://github.com/ckan/datapusher.git@0.0.8
-uWSGI==2.0.13
-uwsgitop

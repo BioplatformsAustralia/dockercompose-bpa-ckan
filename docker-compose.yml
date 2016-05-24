@@ -41,10 +41,10 @@ solr:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
 datapusher:
-  build: datapusher/
+  image: muccg/bpa-datapusher:latest
 
 ckan:
-  build: ckan/
+  image: muccg/bpa-ckan:latest
   environment:
     - DBUSER=ckan
     - WAIT_FOR_DB=1
