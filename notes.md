@@ -82,6 +82,6 @@ Its generally better to use a pypi artifact it one exist for a plugin, some do.
 - http://data.nhm.ac.uk/
 
 # Paste
-CKAN is buit on paste http://pythonpaste.org/, I think it helps to understand how paste works
-to see how CKAN is put together.
+CKAN is built on paste http://pythonpaste.org/, I think it helps to understand how paste works
+to see how CKAN is put together, but don't worry to much about it.
 
