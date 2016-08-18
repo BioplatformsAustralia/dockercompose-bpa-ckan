@@ -13,7 +13,7 @@ $ docker exec -it bpackandocker_ckan_1 /bin/bash
 ```
 Once the stack is up and running you need to create the BPA organisation using the 
 'bootstrap' command from the muccg/bpa-ingest repo. That repo propably needs a container
-but you can run the scrips from a venv:
+but you can run the script from a venv:
 
 ```
 $ virtualenv ./venv/
