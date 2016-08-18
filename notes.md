@@ -1,6 +1,6 @@
 # Quick notes on CKAN and the current CCG workflow
 
-To keep thing sane, I suggest you make a 'workonckan' working directory for yourself on 
+To keep thing sane, I suggest you make a ```workonckan``` working directory for yourself on 
 your dev machine and clone all the repos into that.
 
 This repo contains the docker stack used for dev and prod.
@@ -54,7 +54,7 @@ The muccg/docker-bpa-ckan repo contains our ckan container setup:
 ```
 
 Register new ckan plugins/extentions in /etc/requirements, and rebuild the
-container using develop.sh. Plugins are configured in ```/etc/ckan/default/ckan.ini.in'''.
+container using develop.sh. Plugins are configured in ```/etc/ckan/default/ckan.ini.in```.
 Mounting these as a volume may be quicker if you are doing a lot of config.
 
 This site list ckan extentions http://extensions.ckan.org/
