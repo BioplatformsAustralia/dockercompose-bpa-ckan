@@ -49,20 +49,20 @@ Repos are forked either because of needed bugfixes or enhancements or to version
 plugins that do not have a release regime (everything just lives in master).
 Its generally better to use a pypi artifact it one exist for a plugin, some do.
 
-https://github.com/muccg/docker-bpa-ckan
-https://github.com/muccg/ckanext-bpatheme
-https://github.com/muccg/ckan
-https://github.com/muccg/ckanext-s3filestore
-https://github.com/muccg/dockercompose-bpa-ckan
-https://github.com/muccg/ckanapi
-https://github.com/muccg/ckanext-spatial
-https://github.com/muccg/ckanext-hierarchy
-https://github.com/muccg/ckanext-pages
-https://github.com/muccg/ckan-galleries
-https://github.com/muccg/ckanext-scheming
-https://github.com/muccg/ckan-docker
+- https://github.com/muccg/docker-bpa-ckan
+- https://github.com/muccg/ckanext-bpatheme
+- https://github.com/muccg/ckan
+- https://github.com/muccg/ckanext-s3filestore
+- https://github.com/muccg/dockercompose-bpa-ckan
+- https://github.com/muccg/ckanapi
+- https://github.com/muccg/ckanext-spatial
+- https://github.com/muccg/ckanext-hierarchy
+- https://github.com/muccg/ckanext-pages
+- https://github.com/muccg/ckan-galleries
+- https://github.com/muccg/ckanext-scheming
+- https://github.com/muccg/ckan-docker
 
 # Cool sites using ckan
-https://data.gov.au/dataset
-http://data.nhm.ac.uk/
+- https://data.gov.au/dataset
+- http://data.nhm.ac.uk/
 
