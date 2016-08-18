@@ -1,7 +1,7 @@
 # Quick notes on CKAN and the current CCG workflow
 
 To keep thing sane, I suggest you make a 'workonckan' working directory for yourself on 
-your dev machineand clone all the repos into that.
+your dev machine and clone all the repos into that.
 
 This repo contains the docker stack used for dev and prod.
 
