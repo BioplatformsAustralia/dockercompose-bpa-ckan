@@ -80,3 +80,7 @@ Its generally better to use a pypi artifact it one exist for a plugin, some do.
 - https://data.gov.au/dataset
 - http://data.nhm.ac.uk/
 
+# Paste
+CKAN is buit on paste http://pythonpaste.org/, I think it helps to understand how paste works
+to see how CKAN is put together.
+
