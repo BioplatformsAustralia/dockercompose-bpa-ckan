@@ -6,7 +6,7 @@ your dev machine and clone all the repos into that.
 This repo contains the docker stack used for dev and prod.
 
 Make sure the BPA CKAN secrets (available from lastpass) are in the environment:
-```source bpa-ckan-aws-secrets```
+```$ source bpa-ckan-aws-secrets```
 
 Fire up docker stack using docker-compose, wait until ckan is up and running and then:
 
@@ -14,6 +14,7 @@ Fire up docker stack using docker-compose, wait until ckan is up and running and
 $ docker exec -it bpackandocker_ckan_1 /bin/bash
 # /etc/ckan/deployment/deployment.sh
 ```
+
 Once the stack is up and running you need to create the BPA organisation using the 
 'bootstrap' command from the muccg/bpa-ingest repo. That repo propably needs a container
 but you can run the script from a venv:
@@ -24,7 +25,6 @@ $ source ./venv/bin/activate
 $ pip install -U -r requirements.txt
 $ pip install -e .
 ```
-
 
 The muccg/docker-bpa-ckan repo contains our ckan container setup:
 ```
@@ -54,7 +54,8 @@ The muccg/docker-bpa-ckan repo contains our ckan container setup:
 ```
 
 Register new ckan plugins/extentions in /etc/requirements, and rebuild the
-container using develop.sh
+container using develop.sh. Plugins are configured in ```/etc/ckan/default/ckan.ini.in'''.
+Mounting these as a volume may be quicker if you are doing a lot of config.
 
 This site list ckan extentions http://extensions.ckan.org/
 
