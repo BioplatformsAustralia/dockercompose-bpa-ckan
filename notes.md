@@ -1,7 +1,9 @@
 # Quick notes on CKAN and the current CCG workflow
 
 To keep thing sane, I suggest you make a ```workonckan``` working directory for yourself on 
-your dev machine and clone all the repos into that.
+your dev machine and clone all the CKAN repos you need into that. Stick a file, say 
+```bpa-ckan-aws-secrets``` containing the aws creds and others in that directory so it 
+can be easily sourced when during dev.
 
 This repo contains the docker stack used for dev and prod.
 
