@@ -11,6 +11,17 @@ Fire up docker stack using docker-compose, wait, until ckan is up and running, a
 $ docker exec -it bpackandocker_ckan_1 /bin/bash
 # /etc/ckan/deployment/deployment.sh
 ```
+Once the stack is up and running you need to create the BPA organisation using the 
+'bootstrap' command from the muccg/bpa-ingest repo. That repo propably needs a container
+but you can run the scrips from a venv:
+
+```
+$ virtualenv ./venv/
+$ source ./venv/bin/activate
+$ pip install -U -r requirements.txt
+$ pip install -e .
+```
+
 
 The muccg/docker-bpa-ckan repo contains our ckan container setup:
 ```
