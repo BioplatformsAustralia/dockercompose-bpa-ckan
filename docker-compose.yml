@@ -44,7 +44,7 @@ datapusher:
   image: muccg/bpa-datapusher:latest
 
 ckan:
-  image: muccg/bpa-ckan:latest
+  image: muccg/bpa-ckan:next_release
   environment:
     - DBUSER=ckan
     - WAIT_FOR_DB=1
