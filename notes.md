@@ -1,11 +1,14 @@
-# Quick notest on ckan and the current CCG workflow
+# Quick notes on CKAN and the current CCG workflow
+
+To keep thing sane make a 'workonckan' working directory for yourself and
+clone all the repos into that.
 
 This repo contains the docker stack used for dev and prod.
 
 Make sure the BPA CKAN secrets (available from lastpass) are in the environment:
 ```source bpa-ckan-aws-secrets```
 
-Fire up docker stack using docker-compose wait, until ckan is up and running, and then:
+Fire up docker stack using docker-compose, wait until ckan is up and running and then:
 
 ```
 $ docker exec -it bpackandocker_ckan_1 /bin/bash
