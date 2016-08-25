@@ -89,6 +89,9 @@ To migrate a project, the process is fairly simple:
 4. Run up a stack with the new `docker-bpa-ckan` container, and give the ingest script
    a whirl.
 
+The JSON definition is used by [ckanext-scheming](https://github.com/ckan/ckanext-scheming),
+see the docs for scheming for more info.
+
 CKAN will only store metadata which has a valid definition in a JSON file. If you run
 the ingest script several times, and see it continually trying to set certain JSON
 keys, those almost certainly are missing from the data definition.
