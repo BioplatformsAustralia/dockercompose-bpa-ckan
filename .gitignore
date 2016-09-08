@@ -9,3 +9,4 @@ syntax:glob
 *.js~
 *.egg-info/
 virt*/
+data/
