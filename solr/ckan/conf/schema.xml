@@ -81,6 +81,15 @@ schema. In this case the version should be set to the next CKAN version number.
             <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
+
+    <!-- added for ckanext-scheming -->
+    <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType"
+        spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory"
+        autoIndex="true"
+        distErrPct="0.025"
+        maxDistErr="0.000009"
+        distanceUnits="degrees" />
+
 </types>
 
 
@@ -157,6 +166,9 @@ schema. In this case the version should be set to the next CKAN version number.
     <dynamicField name="res_extras_*" type="text" indexed="true" stored="true" multiValued="true"/>
     <dynamicField name="vocab_*" type="string" indexed="true" stored="true" multiValued="true"/>
     <dynamicField name="*" type="string" indexed="true"  stored="false"/>
+
+    <!-- added for ckanext-spatial: http://docs.ckan.org/projects/ckanext-spatial/en/latest/spatial-search.html -->
+    <field name="spatial_geom"  type="location_rpt" indexed="true" stored="true" multiValued="true" />
 </fields>
 
 <uniqueKey>index_id</uniqueKey>

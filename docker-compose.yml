@@ -29,7 +29,7 @@ db:
     - POSTGRES_PASSWORD=ckan
 
 solr:
-  image: solr:5.5
+  image: muccg/solr-jts:5.5
   ports:
       - "8983:8983"
   volumes:
