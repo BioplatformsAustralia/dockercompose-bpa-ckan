@@ -13,7 +13,7 @@ nginx:
       - ckan:uwsgi
 
 datastore:
-  image: mdillon/postgis:9.5
+  image: mdillon/postgis:9.6
   ports:
     - 5432
   environment:
@@ -21,7 +21,7 @@ datastore:
     - POSTGRES_PASSWORD=datastore
 
 db:
-  image: mdillon/postgis:9.5
+  image: mdillon/postgis:9.6
   ports:
     - 5432
   environment:
