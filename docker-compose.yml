@@ -8,9 +8,11 @@ nginx:
     - "8080:80"
   volumes:
     - ./data/nginx:/data
-    - ./nginx/app.conf:/etc/nginx/sites-enabled/app.conf
+    - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
+    - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
   links:
       - ckan:uwsgi
+      - otu:otu
 
 datastore:
   image: mdillon/postgis:9.6
@@ -37,6 +39,59 @@ solr:
 
 datapusher:
   image: muccg/bpa-datapusher:latest
+
+
+
+
+
+otu:
+  image: muccg/bpaotu-dev
+  environment:
+    - POSTGRES_USER=ckan
+    - POSTGRES_PASSWORD=ckan
+    - WAIT_FOR_DB=1
+    - WAIT_FOR_CACHE=1
+  links:
+    - otu_db
+    - otu_datadev
+    - otu_cache
+    # - otu_uwsgi
+
+otu_datadev:
+  image: debian:jessie
+  volumes:
+    - .:/app
+    - ./data/dev:/data
+
+otu_db:
+  image: mdillon/postgis:10
+  ports:
+      - 5432
+  environment:
+    - POSTGRES_USER=webapp
+    - POSTGRES_PASSWORD=webapp
+
+otu_cache:
+  image: redis:3-alpine
+
+otu_uwsgi:
+  image: muccg/bpaotu-dev
+  command: uwsgi_local
+  environment:
+    - WAIT_FOR_DB=1
+    - WAIT_FOR_CACHE=1
+    - WAIT_FOR_RUNSERVER=1
+    # note: important to wait for runserver in dev as both will attempt to syncdb etc
+  ports:
+    - "9000:9000"
+    - "9001:9001"
+    - "9100:9100"
+    - "9101:9101"
+
+
+
+
+
 
 ckan:
   build: .
@@ -72,4 +127,5 @@ ckan:
     - datastore
     - solr
     - cache
+    - otu
 #    - datapusher
