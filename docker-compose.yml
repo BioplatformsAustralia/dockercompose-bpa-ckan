@@ -12,7 +12,7 @@ nginx:
     - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
   links:
       - ckan:uwsgi
-      - otu:otu
+      - otuuwsgi:otu
 
 datastore:
   image: mdillon/postgis:9.6
@@ -42,28 +42,7 @@ datapusher:
 
 
 
-
-
-otu:
-  image: muccg/bpaotu-dev
-  environment:
-    - POSTGRES_USER=ckan
-    - POSTGRES_PASSWORD=ckan
-    - WAIT_FOR_DB=1
-    - WAIT_FOR_CACHE=1
-  links:
-    - otu_db
-    - otu_datadev
-    - otu_cache
-    # - otu_uwsgi
-
-otu_datadev:
-  image: debian:jessie
-  volumes:
-    - .:/app
-    - ./data/dev:/data
-
-otu_db:
+otudb:
   image: mdillon/postgis:10
   ports:
       - 5432
@@ -71,27 +50,21 @@ otu_db:
     - POSTGRES_USER=webapp
     - POSTGRES_PASSWORD=webapp
 
-otu_cache:
+otucache:
   image: redis:3-alpine
 
-otu_uwsgi:
+otuuwsgi:
   image: muccg/bpaotu-dev
   command: uwsgi_local
   environment:
     - WAIT_FOR_DB=1
     - WAIT_FOR_CACHE=1
-    - WAIT_FOR_RUNSERVER=1
-    # note: important to wait for runserver in dev as both will attempt to syncdb etc
-  ports:
-    - "9000:9000"
-    - "9001:9001"
-    - "9100:9100"
-    - "9101:9101"
-
-
-
-
-
+    - DBSERVER=otudb
+    - CACHE="redis://otucache:6379/1"
+    - CACHESERVER=otucache
+  links:
+    - otudb
+    - otucache
 
 ckan:
   build: .
@@ -119,13 +92,8 @@ ckan:
     - BPAM_REGISTRATION_LOG_URL=${BPAM_REGISTRATION_LOG_URL}
   volumes:
     - ./data/dev:/data
-  ports:
-    - 9100
-    - 9101
   links:
     - db
     - datastore
     - solr
     - cache
-    - otu
-#    - datapusher
