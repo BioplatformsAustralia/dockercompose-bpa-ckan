@@ -5,7 +5,6 @@ nginx:
   image: muccg/nginx-uwsgi:1.10
   ports:
     - "8443:443"
-    - "8080:80"
   volumes:
     - ./data/nginx:/data
     - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
