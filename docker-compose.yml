@@ -61,6 +61,7 @@ otuuwsgi:
     - DBSERVER=otudb
     - CACHE="redis://otucache:6379/1"
     - CACHESERVER=otucache
+    - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
   links:
     - otudb
     - otucache
