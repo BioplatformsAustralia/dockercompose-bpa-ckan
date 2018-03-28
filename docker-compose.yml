@@ -39,8 +39,6 @@ solr:
 datapusher:
   image: muccg/bpa-datapusher:latest
 
-
-
 otudb:
   image: mdillon/postgis:10
   ports:
