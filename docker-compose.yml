@@ -53,6 +53,8 @@ otucache:
 otuuwsgi:
   image: muccg/bpaotu-dev
   command: uwsgi_local
+  volumes:
+    - ./data/dev:/data
   environment:
     - WAIT_FOR_DB=1
     - WAIT_FOR_CACHE=1
