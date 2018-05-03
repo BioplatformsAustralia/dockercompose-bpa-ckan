@@ -61,7 +61,7 @@ bpaotu:
     - WAIT_FOR_CACHE=1
     - WAIT_FOR_DB=1
     - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
-    - CACHE="redis://otucache:6379/1"
+    - CACHE=redis://otucache:6379/1
     - CACHESERVER=otucache
   links:
     - otudb
