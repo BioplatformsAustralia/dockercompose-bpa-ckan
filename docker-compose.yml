@@ -14,7 +14,7 @@ nginx:
       - bpaotu
 
 datastore:
-  image: mdillon/postgis:9.6
+  image: mdillon/postgis:10
   ports:
     - 5432
   environment:
@@ -22,7 +22,7 @@ datastore:
     - POSTGRES_PASSWORD=datastore
 
 db:
-  image: mdillon/postgis:9.6
+  image: mdillon/postgis:10
   ports:
     - 5432
   environment:
