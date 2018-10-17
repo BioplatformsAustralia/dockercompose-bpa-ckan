@@ -60,6 +60,8 @@ services:
         - REGISTRATION_ERROR_LOG_FILE_PATH=${REGISTRATION_ERROR_LOG_FILE_PATH}
         - REGISTRATION_ERROR_LOG_FILE_NAME=${REGISTRATION_ERROR_LOG_FILE_NAME}
         - GOOGLE_UA=${GOOGLE_UA}
+        - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
+        - CKAN_API_KEY=${CKAN_API_KEY}
       volumes:
         - ./data/dev:/data
       ports:
