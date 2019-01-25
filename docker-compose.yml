@@ -30,46 +30,49 @@ services:
         - POSTGRES_USER=ckan
         - POSTGRES_PASSWORD=ckan
 
-    solr:
-      image: muccg/solr-jts:5.5
-      ports:
-          - "8983:8983"
-      volumes:
-          - ./solr/ckan:/opt/solr/server/solr/ckan
+  solr:
+    image: muccg/solr-jts:5.5
+    ports:
+      - "8983:8983"
+    volumes:
+      - ./solr/ckan:/opt/solr/server/solr/ckan
 
-    datapusher:
-      image: muccg/bpa-datapusher:latest
+  datapusher:
+    image: muccg/bpa-datapusher:latest
 
-    ckan:
-      build: .
-      environment:
-        - DBUSER=ckan
-        - WAIT_FOR_DB=1
-        - WAIT_FOR_DATASTORE=1
-        - WAIT_FOR_SOLR=1
-        - WAIT_FOR_CACHE=1
-        - SESSION_SECRET=${SESSION_SECRET}
-        - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-        - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-        - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
-        - AWS_STORAGE_PATH=${AWS_STORAGE_PATH}
-        - MAILGUN_API_KEY=${MAILGUN_API_KEY}
-        - MAILGUN_API_DOMAIN=${MAILGUN_API_DOMAIN}
-        - MAILGUN_SENDER_EMAIL=${MAILGUN_SENDER_EMAIL}
-        - MAILGUN_RECEIVER_EMAIL=${MAILGUN_RECEIVER_EMAIL}
-        - REGISTRATION_ERROR_LOG_FILE_PATH=${REGISTRATION_ERROR_LOG_FILE_PATH}
-        - REGISTRATION_ERROR_LOG_FILE_NAME=${REGISTRATION_ERROR_LOG_FILE_NAME}
-        - GOOGLE_UA=${GOOGLE_UA}
-        - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
-        - CKAN_API_KEY=${CKAN_API_KEY}
-      volumes:
-        - ./data/dev:/data
-      ports:
-        - 9100
-        - 9101
-      links:
-        - db
-        - datastore
-        - solr
-        - cache
-    #    - datapusher
+  ckan:
+    build: .
+    environment:
+      - DBUSER=ckan
+      - WAIT_FOR_DB=1
+      - WAIT_FOR_DATASTORE=1
+      - WAIT_FOR_SOLR=1
+      - WAIT_FOR_CACHE=1
+      - SESSION_SECRET=${SESSION_SECRET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+      - AWS_STORAGE_PATH=${AWS_STORAGE_PATH}
+      - AWS_HOST_NAME_TO_S3=${AWS_HOST_NAME_TO_S3}
+      - REGION_NAME=${REGION_NAME}
+      - SIGNATURE_VERSION=${SIGNATURE_VERSION}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_API_DOMAIN=${MAILGUN_API_DOMAIN}
+      - MAILGUN_SENDER_EMAIL=${MAILGUN_SENDER_EMAIL}
+      - MAILGUN_RECEIVER_EMAIL=${MAILGUN_RECEIVER_EMAIL}
+      - REGISTRATION_ERROR_LOG_FILE_PATH=${REGISTRATION_ERROR_LOG_FILE_PATH}
+      - REGISTRATION_ERROR_LOG_FILE_NAME=${REGISTRATION_ERROR_LOG_FILE_NAME}
+      - GOOGLE_UA=${GOOGLE_UA}
+      - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
+      - CKAN_API_KEY=${CKAN_API_KEY}
+    volumes:
+      - ./data/dev:/data
+    ports:
+      - 9100
+      - 9101
+    links:
+      - db
+      - datastore
+      - solr
+      - cache
+  #    - datapusher
