@@ -1,6 +1,9 @@
 cache:
   image: memcached:1.4
 
+redis:
+  image: redis:latest
+
 nginx:
   image: muccg/nginx-uwsgi:1.9
   ports:
@@ -9,7 +12,7 @@ nginx:
   volumes:
     - ./data/nginx:/data
   links:
-      - ckan:uwsgi
+    - ckan:uwsgi
 
 datastore:
   image: mdillon/postgis:9.5
@@ -30,9 +33,9 @@ db:
 solr:
   image: solr:5.5
   ports:
-      - "8983:8983"
+    - "8983:8983"
   volumes:
-      - ./solr/ckan:/opt/solr/server/solr/ckan
+    - ./solr/ckan:/opt/solr/server/solr/ckan
 
 datapusher:
   image: muccg/bpa-datapusher:latest
@@ -50,6 +53,7 @@ ckan:
     - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
     - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
     - AWS_STORAGE_PATH=composeenv
+    - CKAN_REDIS_URL=redis://redis:6379/1
   volumes:
     - ./data/dev:/data
   ports:
@@ -60,4 +64,5 @@ ckan:
     - datastore
     - solr
     - cache
+    - redis
 #    - datapusher
