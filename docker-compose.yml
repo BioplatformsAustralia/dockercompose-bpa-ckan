@@ -18,7 +18,7 @@ services:
       - ckan:uwsgi
 
   datastore:
-    image: mdillon/postgis:9.6
+    image: mdillon/postgis:10
     ports:
       - 5432
     environment:
@@ -26,7 +26,7 @@ services:
       - POSTGRES_PASSWORD=datastore
 
   db:
-    image: mdillon/postgis:9.6
+    image: mdillon/postgis:10
     ports:
       - 5432
     environment:
@@ -39,9 +39,6 @@ services:
       - "8983:8983"
     volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
-
-  datapusher:
-    image: muccg/bpa-datapusher:latest
 
   ckan:
     build: .
@@ -80,4 +77,3 @@ services:
       - solr
       - cache
       - redis
-  #    - datapusher
