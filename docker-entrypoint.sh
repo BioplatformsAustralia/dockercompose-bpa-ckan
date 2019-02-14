@@ -157,7 +157,7 @@ if [ "$1" = 'uwsgi' ]; then
         cd /app/"$mod" && pip install -U -e .
     done
 
-    exec uwsgi --die-on-term --ini ${UWSGI_OPTS} -H /env
+    exec uwsgi --die-on-term --ini ${UWSGI_OPTS} --py-autoreload 1
 fi
 
 echo "[RUN]: Builtin command not provided [uwsgi]"
