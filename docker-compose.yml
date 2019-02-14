@@ -36,9 +36,6 @@ solr:
   volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
-datapusher:
-  image: muccg/bpa-datapusher:latest
-
 otudb:
   image: mdillon/postgis:10
   ports:
