@@ -91,6 +91,8 @@ ckan:
     - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
   volumes:
     - ./data/dev:/data
+    - .:/app
+    - ./docker-entrypoint.sh:/docker-entrypoint.sh
   links:
     - db
     - datastore
