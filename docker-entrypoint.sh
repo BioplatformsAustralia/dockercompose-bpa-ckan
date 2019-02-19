@@ -153,7 +153,7 @@ if [ "$1" = 'uwsgi' ]; then
     echo "UWSGI_OPTS is ${UWSGI_OPTS}"
 
     # install local copies of various modules
-    for mod in ckan ckanext-bulk ckanext-bpatheme ckanext-s3filestore; do
+    for mod in ckan ckanext-bulk ckanext-bpatheme ckanext-s3filestore ckanext-scheming; do
         cd /app/"$mod" && pip install -U -e .
     done
 

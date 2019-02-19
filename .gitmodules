@@ -10,3 +10,6 @@
 [submodule "ckanext-s3filestore"]
 	path = ckanext-s3filestore
 	url = ssh://github.com/BioplatformsAustralia/ckanext-s3filestore.git
+[submodule "ckanext-scheming"]
+	path = ckanext-scheming
+	turl = ssh://github.com/BioplatformsAustralia/ckanext-scheming.git
