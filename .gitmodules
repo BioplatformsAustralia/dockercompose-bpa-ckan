@@ -12,7 +12,7 @@
 	url = ssh://github.com/BioplatformsAustralia/ckanext-s3filestore.git
 [submodule "ckanext-scheming"]
 	path = ckanext-scheming
-	turl = ssh://github.com/BioplatformsAustralia/ckanext-scheming.git
+	url = ssh://github.com/BioplatformsAustralia/ckanext-scheming.git
 [submodule "ckanext-spatial"]
 	path = ckanext-spatial
 	url = https://github.com/BioplatformsAustralia/ckanext-spatial.git
