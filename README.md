@@ -29,7 +29,7 @@ will need it to use the `bpa-ingest` script.
 # Ingesting metadata & data 
 
 We ingest metadata and data into CKAN using the `bpa-ingest` script. Grab it
-from https://github.com/muccg/bpa-ingest/ and install into a virtualenv (TODO - 
+from https://github.com/bioplatformsaustralia/bpa-ingest/ and install into a virtualenv (TODO - 
 containerise this.)
 
 ```
@@ -104,23 +104,23 @@ a PR has been put in.
 A large number of the forks were made because upstream had no tags (other than 'master'),
 and were made so that we could reproduce our environment.
 
-- https://github.com/muccg/ckanapi - changed to use requests_toolbelt to stream large POST
+- https://github.com/bioplatformsaustralia/ckanapi - changed to use requests_toolbelt to stream large POST
   requests, rather than building the whole request in-memory. needs to be tidied up and
   sent to upstream as a PR.
-- https://github.com/muccg/ckan - local change to preserve case on filenames, forked from the
+- https://github.com/bioplatformsaustralia/ckan - local change to preserve case on filenames, forked from the
   2.5.2 tag. not sure if this can be accepted upstream
-- https://github.com/muccg/ckanext-bpatheme - our theme. this isn't of much interest to anyone
+- https://github.com/bioplatformsaustralia/ckanext-bpatheme - our theme. this isn't of much interest to anyone
   else. forked from the WA state government theme.
-- https://github.com/muccg/ckanext-s3filestore - changed to use boto3, and stream large file
+- https://github.com/bioplatformsaustralia/ckanext-s3filestore - changed to use boto3, and stream large file
   uploads. PR is in and awaiting upstream feedback
 
 Simply tagged for tracking of changes
 
-- https://github.com/muccg/ckanext-spatial
-- https://github.com/muccg/ckanext-hierarchy
-- https://github.com/muccg/ckanext-pages
-- https://github.com/muccg/ckan-galleries
-- https://github.com/muccg/ckanext-scheming
+- https://github.com/bioplatformsaustralia/ckanext-spatial
+- https://github.com/bioplatformsaustralia/ckanext-hierarchy
+- https://github.com/bioplatformsaustralia/ckanext-pages
+- https://github.com/bioplatformsaustralia/ckan-galleries
+- https://github.com/bioplatformsaustralia/ckanext-scheming
 
 # Other organisations using CKAN
 

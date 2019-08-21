@@ -30,7 +30,7 @@ db:
     - POSTGRES_PASSWORD=ckan
 
 solr:
-  image: muccg/solr-jts:5.5
+  image: bioplatformsaustralia/solr-jts:5.5
   ports:
       - "8983:8983"
   volumes:
@@ -48,7 +48,7 @@ otucache:
   image: redis:3-alpine
 
 bpaotu:
-  image: muccg/bpaotu-dev
+  image: bioplatformsaustralia/bpaotu-dev
   command: uwsgi_local
   volumes:
     - ./data/dev:/data

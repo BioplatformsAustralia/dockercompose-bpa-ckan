@@ -1,5 +1,5 @@
-FROM muccg/bpa-ckan:next_release
-MAINTAINER https://github.com/muccg/bpa-ckan-docker
+FROM bioplatformsaustralia/bpa-ckan:next_release
+MAINTAINER https://github.com/bioplatformsaustralia/bpa-ckan-docker
 
 # quick dev dockerfile for CKAN
 
