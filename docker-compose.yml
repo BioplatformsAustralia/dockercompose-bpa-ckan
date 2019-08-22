@@ -11,7 +11,6 @@ nginx:
     - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
   links:
       - ckan:uwsgi
-      - bpaotu
 
 datastore:
   image: mdillon/postgis:10
@@ -36,34 +35,6 @@ solr:
   volumes:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
-otudb:
-  image: mdillon/postgis:10
-  ports:
-      - 5432
-  environment:
-    - POSTGRES_USER=webapp
-    - POSTGRES_PASSWORD=webapp
-
-otucache:
-  image: redis:3-alpine
-
-bpaotu:
-  image: bioplatformsaustralia/bpaotu-dev
-  command: uwsgi_local
-  volumes:
-    - ./data/dev:/data
-  environment:
-    - CKAN_CACHE_TIMEOUT=86400
-    - DBSERVER=otudb
-    - WAIT_FOR_CACHE=1
-    - WAIT_FOR_DB=1
-    - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
-    - CACHE=redis://otucache:6379/1
-    - CACHESERVER=otucache
-  links:
-    - otudb
-    - otucache
-
 ckan:
   build: .
   environment:
@@ -86,8 +57,6 @@ ckan:
     - GOOGLE_UA=${GOOGLE_UA}
     - CAPTCHA_PUBLIC_KEY=${CAPTCHA_PUBLIC_KEY}
     - CAPTCHA_PRIVATE_KEY=${CAPTCHA_PRIVATE_KEY}
-    - BPAM_REGISTRATION_LOG_KEY=${BPAM_REGISTRATION_LOG_KEY}
-    - BPAM_REGISTRATION_LOG_URL=${BPAM_REGISTRATION_LOG_URL}
     - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
   volumes:
     - ./data/dev:/data
