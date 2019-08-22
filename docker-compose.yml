@@ -1,12 +1,11 @@
 cache:
-  image: memcached:1.4
+  image: memcached:1.5
 
 nginx:
-  image: muccg/nginx-uwsgi:1.10
+  image: nginx:1.16-alpine
   ports:
     - "8443:443"
   volumes:
-    - ./data/nginx:/data
     - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
     - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
   links:
@@ -36,7 +35,7 @@ solr:
       - ./solr/ckan:/opt/solr/server/solr/ckan
 
 ckan:
-  build: .
+  build: docker-bpa-ckan
   environment:
     - DBUSER=ckan
     - WAIT_FOR_DB=1
