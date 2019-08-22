@@ -2,7 +2,7 @@ cache:
   image: memcached:1.5
 
 nginx:
-  image: nginx:1.16-alpine
+  build: nginx
   ports:
     - "8443:443"
   volumes:
