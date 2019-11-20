@@ -61,10 +61,10 @@ ckan:
     - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
     - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
     - CKAN_API_KEY=${CKAN_API_KEY}
+    - LOCAL_DEV=yes
   volumes:
     - ./data/dev:/data
     - .:/app
-    - ./docker-entrypoint.sh:/docker-entrypoint.sh
   links:
     - db
     - datastore
