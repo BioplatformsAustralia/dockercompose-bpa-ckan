@@ -24,7 +24,7 @@
 <!-- We update the version when there is a backward-incompatible change to this
 schema. In this case the version should be set to the next CKAN version number.
 (x.y but not x.y.z since it needs to be a float) -->
-<schema name="ckan" version="2.3">
+<schema name="ckan" version="2.8">
 
 <types>
     <fieldType name="string" class="solr.StrField" sortMissingLast="true" omitNorms="true"/>
@@ -81,7 +81,6 @@ schema. In this case the version should be set to the next CKAN version number.
             <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
-
     <!-- added for ckanext-scheming -->
     <fieldType name="location_rpt" class="solr.SpatialRecursivePrefixTreeFieldType"
         spatialContextFactory="com.spatial4j.core.context.jts.JtsSpatialContextFactory"
@@ -89,7 +88,6 @@ schema. In this case the version should be set to the next CKAN version number.
         distErrPct="0.025"
         maxDistErr="0.000009"
         distanceUnits="degrees" />
-
 </types>
 
 
@@ -121,6 +119,7 @@ schema. In this case the version should be set to the next CKAN version number.
     <field name="organization" type="string" indexed="true" stored="true" multiValued="false"/>
 
     <field name="capacity" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="permission_labels" type="string" indexed="true" stored="false" multiValued="true"/>
 
     <field name="res_name" type="textgen" indexed="true" stored="true" multiValued="true" />
     <field name="res_description" type="textgen" indexed="true" stored="true" multiValued="true"/>
