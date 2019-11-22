@@ -1,72 +1,86 @@
-cache:
-  image: memcached:1.5
+version: '3'
 
-nginx:
-  build: nginx
-  ports:
-    - "8443:443"
-  volumes:
-    - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
-    - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
-  links:
-      - ckan:uwsgi
+services:
+  cache:
+    image: memcached:1.5
+  
+  nginx:
+    build: nginx
+    ports:
+      - "8443:443"
+    volumes:
+      - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
+      - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
+    links:
+        - ckan:uwsgi
+  
+  datastore:
+    image: mdillon/postgis:10
+    ports:
+      - 5432
+    volumes:
+      - pgdatastore:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=datastore
+      - POSTGRES_PASSWORD=datastore
+  
+  db:
+    image: mdillon/postgis:10
+    volumes:
+      - pgdb:/var/lib/postgresql/data
+    ports:
+      - 5432
+    environment:
+      - POSTGRES_USER=ckan
+      - POSTGRES_PASSWORD=ckan
+  
+  solr:
+    image: bioplatformsaustralia/solr-jts:5.5
+    ports:
+        - "8983:8983"
+    volumes:
+        - solr:/opt/solr/
+        - ./solr/ckan:/opt/solr/server/solr/ckan
+  
+  ckan:
+    build: docker-bpa-ckan
+    environment:
+      - DBUSER=ckan
+      - WAIT_FOR_DB=1
+      - WAIT_FOR_DATASTORE=1
+      - WAIT_FOR_SOLR=1
+      - WAIT_FOR_CACHE=1
+      - SESSION_SECRET=${SESSION_SECRET}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+      - AWS_HOST_NAME_TO_S3=${AWS_HOST_NAME_TO_S3}
+      - AWS_REGION_NAME=${AWS_REGION_NAME}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
+      - AWS_STORAGE_PATH=${AWS_STORAGE_PATH}
+      - MAILGUN_API_KEY=${MAILGUN_API_KEY}
+      - MAILGUN_API_DOMAIN=${MAILGUN_API_DOMAIN}
+      - MAILGUN_SENDER_EMAIL=${MAILGUN_SENDER_EMAIL}
+      - MAILGUN_RECEIVER_EMAIL=${MAILGUN_RECEIVER_EMAIL}
+      - REGISTRATION_ERROR_LOG_FILE_PATH=${REGISTRATION_ERROR_LOG_FILE_PATH}
+      - REGISTRATION_ERROR_LOG_FILE_NAME=${REGISTRATION_ERROR_LOG_FILE_NAME}
+      - GOOGLE_UA=${GOOGLE_UA}
+      - CAPTCHA_PUBLIC_KEY=${CAPTCHA_PUBLIC_KEY}
+      - CAPTCHA_PRIVATE_KEY=${CAPTCHA_PRIVATE_KEY}
+      - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
+      - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
+      - CKAN_API_KEY=${CKAN_API_KEY}
+      - LOCAL_DEV=yes
+    volumes:
+      - .:/app
+      - ckandata:/data
+    links:
+      - db
+      - datastore
+      - solr
+      - cache
 
-datastore:
-  image: mdillon/postgis:10
-  ports:
-    - 5432
-  environment:
-    - POSTGRES_USER=datastore
-    - POSTGRES_PASSWORD=datastore
-
-db:
-  image: mdillon/postgis:10
-  ports:
-    - 5432
-  environment:
-    - POSTGRES_USER=ckan
-    - POSTGRES_PASSWORD=ckan
-
-solr:
-  image: bioplatformsaustralia/solr-jts:5.5
-  ports:
-      - "8983:8983"
-  volumes:
-      - ./solr/ckan:/opt/solr/server/solr/ckan
-
-ckan:
-  build: docker-bpa-ckan
-  environment:
-    - DBUSER=ckan
-    - WAIT_FOR_DB=1
-    - WAIT_FOR_DATASTORE=1
-    - WAIT_FOR_SOLR=1
-    - WAIT_FOR_CACHE=1
-    - SESSION_SECRET=${SESSION_SECRET}
-    - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-    - AWS_HOST_NAME_TO_S3=${AWS_HOST_NAME_TO_S3}
-    - AWS_REGION_NAME=${AWS_REGION_NAME}
-    - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
-    - AWS_BUCKET_NAME=${AWS_BUCKET_NAME}
-    - AWS_STORAGE_PATH=${AWS_STORAGE_PATH}
-    - MAILGUN_API_KEY=${MAILGUN_API_KEY}
-    - MAILGUN_API_DOMAIN=${MAILGUN_API_DOMAIN}
-    - MAILGUN_SENDER_EMAIL=${MAILGUN_SENDER_EMAIL}
-    - MAILGUN_RECEIVER_EMAIL=${MAILGUN_RECEIVER_EMAIL}
-    - REGISTRATION_ERROR_LOG_FILE_PATH=${REGISTRATION_ERROR_LOG_FILE_PATH}
-    - REGISTRATION_ERROR_LOG_FILE_NAME=${REGISTRATION_ERROR_LOG_FILE_NAME}
-    - GOOGLE_UA=${GOOGLE_UA}
-    - CAPTCHA_PUBLIC_KEY=${CAPTCHA_PUBLIC_KEY}
-    - CAPTCHA_PRIVATE_KEY=${CAPTCHA_PRIVATE_KEY}
-    - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
-    - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
-    - CKAN_API_KEY=${CKAN_API_KEY}
-    - LOCAL_DEV=yes
-  volumes:
-    - ./data/dev:/data
-    - .:/app
-  links:
-    - db
-    - datastore
-    - solr
-    - cache
+volumes:
+  solr:
+  pgdb:
+  pgdatastore:
+  ckandata:
