@@ -19,7 +19,7 @@ services:
     ports:
       - 5432
     volumes:
-      - pgdatastore:/var/lib/postgresql/data
+      - pgdatastore28:/var/lib/postgresql/data
     environment:
       - POSTGRES_USER=datastore
       - POSTGRES_PASSWORD=datastore
@@ -27,7 +27,7 @@ services:
   db:
     image: mdillon/postgis:10
     volumes:
-      - pgdb:/var/lib/postgresql/data
+      - pgdb28:/var/lib/postgresql/data
     ports:
       - 5432
     environment:
@@ -39,7 +39,7 @@ services:
     ports:
         - "8983:8983"
     volumes:
-        - solr:/opt/solr/
+        - solr28:/opt/solr/
         - ./solr/ckan:/opt/solr/server/solr/ckan
   
   ckan:
@@ -72,7 +72,7 @@ services:
       - LOCAL_DEV=yes
     volumes:
       - .:/app
-      - ckandata:/data
+      - ckandata28:/data
     links:
       - db
       - datastore
@@ -80,7 +80,7 @@ services:
       - cache
 
 volumes:
-  solr:
-  pgdb:
-  pgdatastore:
-  ckandata:
+  solr28:
+  pgdb28:
+  pgdatastore28:
+  ckandata28:
