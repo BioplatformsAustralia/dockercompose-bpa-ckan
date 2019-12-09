@@ -43,7 +43,7 @@ Once the software is up, get it to set up a BioPlatforms Australia organisation
 in your local installation:
 
 ```
-$ bpa-ingest -u http://localhost:8080/app/ -k edf504a5-e96f-4903-bc0a-75c0057aa856 bootstrap 
+$ bpa-ingest -u http://localhost:8080/ -k edf504a5-e96f-4903-bc0a-75c0057aa856 bootstrap 
 2016-08-25 11:31:21,457 [DEBUG]  organization/cc5a6adb-1b6f-448b-8d4c-488d140da265: difference on k `description', we have `Bioplatforms Australia enables innovation and collaboration through investments in world class infrastructure and expertise.' vs ckan `'
 2016-08-25 11:31:21,457 [DEBUG]  organization/cc5a6adb-1b6f-448b-8d4c-488d140da265: difference on k `display_name', we have `BioPlatforms Australia' vs ckan `bioplatforms-australia'
 2016-08-25 11:31:21,457 [DEBUG]  organization/cc5a6adb-1b6f-448b-8d4c-488d140da265: difference on k `image_display_url', we have `http://www.bioplatforms.com/wp-content/uploads/BioplatformsAustralia.png' vs ckan `'
@@ -65,7 +65,7 @@ streaming uploads, so you'll encounter timeouts if you try to upload large files
 All of that said, here's how you'd load GBR Amplicons into CKAN:
 
 ```
-bpa-ingest -u http://localhost:8080/app/ -k edf504a5-e96f-4903-bc0a-75c0057aa856 gbr-amplicon /tmp/gbr
+bpa-ingest -u http://localhost:8080/ -k edf504a5-e96f-4903-bc0a-75c0057aa856 gbr-amplicon /tmp/gbr
 ```
 
 # Migrating projects to CKAN
