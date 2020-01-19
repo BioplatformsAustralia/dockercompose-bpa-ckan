@@ -68,6 +68,43 @@ All of that said, here's how you'd load GBR Amplicons into CKAN:
 bpa-ingest -u http://localhost:8080/ -k edf504a5-e96f-4903-bc0a-75c0057aa856 gbr-amplicon /tmp/gbr
 ```
 
+# Developing against ckan in local docker-compose environment
+
+* Be aware that:
+- usually you'll develop against 'next_release' git branch in sub-modules, but this overall local container can be committed against master.
+- updates to any sub-modules, e.g., ckan, will require you to rebuild before developing against the updates
+```
+docker-compose build ckan
+```
+
+* You'll need a copy of an environment file (from one of the developers). Source this and then bring up the environment.
+```
+source </path/to/your/bpa.env>
+docker-compose up
+```
+
+* You'll need a copy of data (from one of the developers) to ingest before running deployment.sh
+```
+docker-compose stop
+docker cp </path/to/dumpfilename.dump> dockercompose-bpa-ckan_db_1:/var/lib/postgresql/data/
+docker-compose up db
+docker-compose exec db bash
+# inside the postgres container
+pg_restore -Fc -U ckan -d ckan < /var/lib/postgresql/data/dumpfilename.dump
+exit
+# outside the postgis container
+docker-compose stop
+docker-compose up
+docker-compose exec ckan bash
+# inside the CKAN container: fix permissions and so on
+/etc/ckan/deployment/deployment.sh
+# re-index SOLR database
+/docker-entrypoint.sh paster --plugin=ckan search-index rebuild -c /etc/ckan/default/ckan.ini
+```
+NB: The reindex will take some time (so ensure it can run uninterrupted)
+
+* Now go to https://localhost:8443 (and you should see the BPA page with the 'DATA PORTAL' text )
+
 # Migrating projects to CKAN
 
 If you look at the `bpa-ingest` code, you'll see a Python module per project. The
