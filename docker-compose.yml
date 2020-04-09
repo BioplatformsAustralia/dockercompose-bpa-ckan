@@ -70,6 +70,10 @@ services:
       - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
       - CKAN_API_KEY=${CKAN_API_KEY}
       - LOCAL_DEV=yes
+      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_USER=${SMTP_USER}
+      - SMTP_PASSWORD=${SMTP_PASSWORD}
+      - SMTP_MAIL_FROM=${SMTP_MAIL_FROM}
     volumes:
       - .:/app
       - ckandata28:/data
