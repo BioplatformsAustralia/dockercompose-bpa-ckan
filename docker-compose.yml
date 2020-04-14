@@ -74,6 +74,8 @@ services:
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_MAIL_FROM=${SMTP_MAIL_FROM}
+      - UWSGI_PROCESSES=${UWSGI_PROCESSES}
+      - UWSGI_THREADS=${UWSGI_THREADS}
     volumes:
       - .:/app
       - ckandata28:/data
