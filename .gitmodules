@@ -19,3 +19,6 @@
 [submodule "docker-bpa-ckan"]
 	path = docker-bpa-ckan
 	url = ssh://github.com/BioplatformsAustralia/docker-bpa-ckan
+[submodule "ckanext-initiatives"]
+	path = ckanext-initiatives
+	url = ssh://github.com/BioplatformsAustralia/ckanext-initiatives.git
