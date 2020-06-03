@@ -105,6 +105,17 @@ NB: The reindex will take some time (so ensure it can run uninterrupted)
 
 * Now go to https://localhost:8443 (and you should see the BPA page with the 'DATA PORTAL' text )
 
+## Troubleshooting:
+#### Running docker-compose up (after initalisation previously done), docker stack fails - no admin user.
+- Upon bringing up stack again, you may find that the admin user no longer exists, which causes stack to fail.
+So, after sourcing the env file and bringing up the container, you may have to run through the initial permissions step again:
+```
+docker-compose exec ckan bash
+# inside the CKAN container: fix permissions and so on
+/etc/ckan/deployment/deployment.sh 
+```
+
+
 # Migrating projects to CKAN
 
 If you look at the `bpa-ingest` code, you'll see a Python module per project. The
