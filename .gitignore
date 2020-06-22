@@ -10,3 +10,5 @@ syntax:glob
 *.egg-info/
 virt*/
 data/
+.DS_Store
+.idea/
