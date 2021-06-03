@@ -3,7 +3,7 @@ version: '3'
 services:
   cache:
     image: memcached:1.5
-  
+
   nginx:
     build: nginx
     ports:
@@ -12,8 +12,8 @@ services:
       - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
       - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
     links:
-        - ckan:uwsgi
-  
+      - ckan:uwsgi
+
   datastore:
     image: mdillon/postgis:10
     ports:
@@ -23,7 +23,7 @@ services:
     environment:
       - POSTGRES_USER=datastore
       - POSTGRES_PASSWORD=datastore
-  
+
   db:
     image: mdillon/postgis:10
     volumes:
@@ -33,15 +33,15 @@ services:
     environment:
       - POSTGRES_USER=ckan
       - POSTGRES_PASSWORD=ckan
-  
+
   solr:
     image: bioplatformsaustralia/solr-jts:5.5
     ports:
         - "8983:8983"
     volumes:
-        - solr28:/opt/solr/
-        - ./solr/ckan:/opt/solr/server/solr/ckan
-  
+      - solr28:/opt/solr/
+      - ./solr/ckan:/opt/solr/server/solr/ckan
+
   ckan:
     build: docker-bpa-ckan
     environment:
@@ -76,9 +76,18 @@ services:
       - SMTP_MAIL_FROM=${SMTP_MAIL_FROM}
       - UWSGI_PROCESSES=${UWSGI_PROCESSES}
       - UWSGI_THREADS=${UWSGI_THREADS}
+      - SUMMARY_TABLE_DATA_PATH=${SUMMARY_TABLE_DATA_PATH}
+      - COMMS_TITLE=${COMMS_TITLE}
+      - COMMS_MESSAGE=${COMMS_MESSAGE}
+      - COMMS_LINK_PRE=${COMMS_LINK_PRE}
+      - COMMS_LINK_POST=${COMMS_LINK_POST}
+      - COMMS_LINK_TEXT=${COMMS_LINK_TEXT}
+      - COMMS_LINK_HREF=${COMMS_LINK_HREF}
+      - COMMS_OWNER=${COMMS_OWNER}
     volumes:
       - .:/app
       - ckandata28:/data
+      - /tmp/googlesheets:/opt/googlesheets
     links:
       - db
       - datastore

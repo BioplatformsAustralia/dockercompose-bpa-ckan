@@ -12,3 +12,5 @@ virt*/
 data/
 .DS_Store
 .idea/
+.vscode/
+.devcontainer/
