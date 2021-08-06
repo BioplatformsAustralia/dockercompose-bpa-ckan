@@ -6,7 +6,7 @@
 	url = ssh://github.com/BioplatformsAustralia/ckanext-bpatheme.git
 [submodule "ckanext-bulk"]
 	path = ckanext-bulk
-	url = ssh://github.com/BioplatformsAustralia/ckanext-bulk.git
+	url = ../ckanext-bulk
 [submodule "ckanext-s3filestore"]
 	path = ckanext-s3filestore
 	url = ssh://github.com/BioplatformsAustralia/ckanext-s3filestore.git
