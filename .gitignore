@@ -14,3 +14,4 @@ data/
 .idea/
 .vscode/
 .devcontainer/
+local.env
