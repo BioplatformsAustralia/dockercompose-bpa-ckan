@@ -88,6 +88,9 @@ services:
       - COMMS_LINK_TEXT=${COMMS_LINK_TEXT}
       - COMMS_LINK_HREF=${COMMS_LINK_HREF}
       - COMMS_OWNER=${COMMS_OWNER}
+      - GALAXY_HOST=${GALAXY_HOST}
+      - GALAXY_API_KEY=${GALAXY_API_KEY}
+      - GALAXY_TEST_FILE=${GALAXY_TEST_FILE}
     volumes:
       - .:/app
       - ckandata28:/data
