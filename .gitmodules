@@ -22,3 +22,6 @@
 [submodule "ckanext-initiatives"]
 	path = ckanext-initiatives
 	url = ssh://github.com/BioplatformsAustralia/ckanext-initiatives.git
+[submodule "ckanext-ytp-request"]
+	path = ckanext-ytp-request
+	url = ssh://github.com/BioplatformsAustralia/ckanext-ytp-request.git
