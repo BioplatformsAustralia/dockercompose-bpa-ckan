@@ -159,8 +159,12 @@ and were made so that we could reproduce our environment.
   2.5.2 tag. not sure if this can be accepted upstream
 - https://github.com/bioplatformsaustralia/ckanext-bpatheme - our theme. this isn't of much interest to anyone
   else. forked from the WA state government theme.
+- https://github.com/bioplatformsaustralia/ckanext-bpaschema - our schemas. this isn't of much interest to anyone
+  else.
 - https://github.com/bioplatformsaustralia/ckanext-s3filestore - changed to use boto3, and stream large file
   uploads. PR is in and awaiting upstream feedback
+- https://github.com/bioplatformsaustralia/ckanext-ytp-request - heavily forked to add membership request
+  management to the site
 
 Simply tagged for tracking of changes
 

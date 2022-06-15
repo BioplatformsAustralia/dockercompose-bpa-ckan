@@ -4,6 +4,9 @@
 [submodule "ckanext-bpatheme"]
 	path = ckanext-bpatheme
 	url = ssh://github.com/BioplatformsAustralia/ckanext-bpatheme.git
+[submodule "ckanext-bpaschema"]
+	path = ckanext-bpaschema
+	url = ssh://github.com/BioplatformsAustralia/ckanext-bpaschema.git
 [submodule "ckanext-bulk"]
 	path = ckanext-bulk
 	url = ssh://github.com/BioplatformsAustralia/ckanext-bulk.git
