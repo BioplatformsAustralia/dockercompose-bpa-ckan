@@ -46,6 +46,8 @@ services:
     build: docker-bpa-ckan
     environment:
       - DBUSER=ckan
+      - DATASTORE_DBUSER=datastore
+      - DATASTORE_DB_READONLY_USER=datastore
       - WAIT_FOR_DB=1
       - WAIT_FOR_DATASTORE=1
       - WAIT_FOR_SOLR=1
