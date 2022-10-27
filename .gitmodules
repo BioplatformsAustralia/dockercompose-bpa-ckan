@@ -7,6 +7,7 @@
 [submodule "ckanext-bpaschema"]
 	path = ckanext-bpaschema
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-bpaschema.git
+	branch = main
 [submodule "ckanext-bulk"]
 	path = ckanext-bulk
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-bulk.git
@@ -28,3 +29,4 @@
 [submodule "ckanext-ytp-request"]
 	path = ckanext-ytp-request
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-ytp-request.git
+	branch = development
