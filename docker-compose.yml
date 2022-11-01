@@ -78,10 +78,11 @@ services:
       - CKAN_SITE_URL=${CKAN_SITE_URL:-https://localhost:8443/}
       - LOCAL_DEV=yes
       - S3FILESTORE_CHECK_ACCESS_ON_STARTUP=false
-      - SMTP_SERVER=${SMTP_SERVER}
+      - SMTP_SERVER=mailcatcher:1025
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASSWORD=${SMTP_PASSWORD}
       - SMTP_MAIL_FROM=${SMTP_MAIL_FROM}
+      - CKAN_SMTP_STARTTLS=False
       - BIOPLATFORMS_HELPDESK_ADDRESS=${BIOPLATFORMS_HELPDESK_ADDRESS}
       - UWSGI_PROCESSES=${UWSGI_PROCESSES}
       - UWSGI_THREADS=${UWSGI_THREADS}
@@ -102,6 +103,13 @@ services:
       - datastore
       - solr
       - cache
+      - mailcatcher
+
+  mailcatcher:
+    image: sj26/mailcatcher:latest
+    ports:
+      - "1080:1080"
+      - "1025:1025"
 
 volumes:
   solr28:
