@@ -104,6 +104,8 @@ services:
       - solr
       - cache
       - mailcatcher
+    tty: true
+    stdin_open: true
 
   mailcatcher:
     image: sj26/mailcatcher:latest

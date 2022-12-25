@@ -30,3 +30,9 @@
 	path = ckanext-ytp-request
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-ytp-request.git
 	branch = development
+[submodule "ckanext-saml2auth"]
+	path = ckanext-saml2auth
+	url = git@github.com:tino097/ckanext-saml2auth.git
+[submodule "cilogin"]
+	path = cilogin
+	url = git@github.com:tino097/cilogin.git
