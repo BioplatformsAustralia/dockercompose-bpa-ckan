@@ -174,6 +174,34 @@ Simply tagged for tracking of changes
 - https://github.com/bioplatformsaustralia/ckan-galleries
 - https://github.com/bioplatformsaustralia/ckanext-scheming
 
+# Upgrading SOLR from v5 to v8
+
+If you were previously using this development environment with the older BPA 
+SOLR container with spatial support, you'll need to remove the older named
+volume used for storing the SOLR cache
+
+`docker volume ls`
+
+The output should include the old volume, with something similar to:
+
+        DRIVER    VOLUME NAME
+        ...
+        local     dockercompose-bpa-ckan_solr28
+        ...
+
+Run the following command to remove
+
+`docker volume rm dockercompose-bpa-ckan_solr28`
+
+Run the following command to rebuild the SOLR indexes once you've brought
+the docker-compose up
+
+`docker exec -it dockercompose-bpa-ckan_ckan /bin/bash`
+
+then
+
+`/docker-entrypoint.sh ckan -c /etc/ckan/default/ckan.ini search-index rebuild -r`
+
 # Other organisations using CKAN
 
 Pretty much every major government, and almost every Australian state government.
