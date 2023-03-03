@@ -35,12 +35,11 @@ services:
       - POSTGRES_PASSWORD=ckan
 
   solr:
-    image: bioplatformsaustralia/solr-jts:5.5
+    image: bioplatformsaustralia/ckan-solr-bpa:latest
     ports:
         - "8983:8983"
     volumes:
-      - solr28:/opt/solr/
-      - ./solr/ckan:/opt/solr/server/solr/ckan
+      - solr8:/var/solr/data
 
   ckan:
     build: docker-bpa-ckan
@@ -114,7 +113,7 @@ services:
       - "1025:1025"
 
 volumes:
-  solr28:
+  solr8:
   pgdb28:
   pgdatastore28:
   ckandata28:
