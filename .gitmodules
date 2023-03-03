@@ -33,6 +33,6 @@
 [submodule "ckanext-saml2auth"]
 	path = ckanext-saml2auth
 	url = git@github.com:tino097/ckanext-saml2auth.git
-[submodule "cilogin"]
-	path = cilogin
-	url = git@github.com:tino097/cilogin.git
+[submodule "ckanext-cilogin"]
+	path = ckanext-cilogin
+	url = git@github.com:tino097/ckanext-cilogin.git
