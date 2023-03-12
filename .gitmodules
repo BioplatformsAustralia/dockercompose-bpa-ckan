@@ -32,7 +32,7 @@
 	branch = development
 [submodule "ckanext-cilogin"]
 	path = ckanext-cilogin
-	url = ./ckanext-cilogin
+	url = git@github.com:tino097/ckanext-cilogin.git
 [submodule "ckanext-saml2auth"]
 	path = ckanext-saml2auth
-	url = ./ckanext-saml2auth
+	url = git@github.com:tino097/ckanext-saml2auth.git
