@@ -31,3 +31,7 @@
 	path = ckanext-ytp-request
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-ytp-request.git
 	branch = development
+[submodule "ckanext-shopping-cart"]
+	path = ckanext-shopping-cart
+	url = ssh://git@github.com/BioplatformsAustralia/ckanext-shopping-cart
+	branch = master
