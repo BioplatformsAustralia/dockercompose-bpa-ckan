@@ -36,3 +36,6 @@
 [submodule "ckanext-cilogin"]
 	path = ckanext-cilogin
 	url = ssh://git@github.com/tino097/ckanext-cilogin.git
+[submodule "ckanext-bpatogalaxy"]
+	path = ckanext-bpatogalaxy
+	url = git@github.com:BioplatformsAustralia/ckanext-bpatogalaxy.git
