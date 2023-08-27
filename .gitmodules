@@ -33,10 +33,11 @@
 	branch = development
 [submodule "ckanext-saml2auth"]
 	path = ckanext-saml2auth
-	url = ./ckanext-saml2auth
+	url = git@github.com:BioplatformsAustralia/ckanext-saml2auth.git
+	branch = bioplatforms-branch
 [submodule "ckanext-cilogin"]
 	path = ckanext-cilogin
-	url = ./ckanext-cilogin
+	url = git@github.com:BioplatformsAustralia/ckanext-cilogin.git
 [submodule "ckanext-shopping-cart"]
 	path = ckanext-shopping-cart
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-shopping-cart
