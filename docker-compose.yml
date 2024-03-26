@@ -3,6 +3,8 @@ version: '3'
 services:
   cache:
     image: memcached:1.5
+    networks:
+      - bpa
 
   nginx:
     build: nginx
@@ -12,7 +14,11 @@ services:
       - ./nginx/sites-enabled/app.conf:/etc/nginx/sites-enabled/app.conf
       - ./nginx/conf.d/app.conf:/etc/nginx/conf.d/app.conf
     links:
-      - ckan:uwsgi
+      - "ckan:uwsgi"
+    depends_on:
+      - ckan
+    networks:
+      - bpa
 
   datastore:
     image: mdillon/postgis:10
@@ -23,6 +29,8 @@ services:
     environment:
       - POSTGRES_USER=datastore
       - POSTGRES_PASSWORD=datastore
+    networks:
+      - bpa
 
   db:
     image: mdillon/postgis:10
@@ -33,6 +41,8 @@ services:
     environment:
       - POSTGRES_USER=ckan
       - POSTGRES_PASSWORD=ckan
+    networks:
+      - bpa
 
   solr:
     image: bioplatformsaustralia/ckan-solr-bpa:latest
@@ -40,6 +50,8 @@ services:
         - "8983:8983"
     volumes:
       - solr8:/var/solr/data
+    networks:
+      - bpa
 
   ckan:
     build: docker-bpa-ckan
@@ -105,15 +117,27 @@ services:
       - solr
       - cache
       - mailcatcher
+    depends_on:
+      - cache
+      - solr
+    networks:
+      bpa:
+        aliases:
+          - uwsgi
 
   mailcatcher:
     image: sj26/mailcatcher:latest
     ports:
       - "1080:1080"
       - "1025:1025"
+    networks:
+      - bpa
 
 volumes:
   solr8:
   pgdb28:
   pgdatastore28:
   ckandata28:
+
+networks:
+  bpa:
