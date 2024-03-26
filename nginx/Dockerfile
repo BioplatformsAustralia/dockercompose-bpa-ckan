@@ -1,5 +1,5 @@
 #
-FROM nginx:1.16-alpine
+FROM nginx:1.23.3-alpine-slim
 MAINTAINER https://github.com/BioplatformsAustralia
 
 RUN rm -rf /etc/nginx
