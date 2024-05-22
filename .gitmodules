@@ -35,3 +35,7 @@
 	path = ckanext-shopping-cart
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-shopping-cart
 	branch = master
+[submodule "ckanext-laissezpasser"]
+	path = ckanext-laissezpasser
+	url = ssh://git@github.com/BioplatformsAustralia/ckanext-laissezpasser.git
+	branch = main
