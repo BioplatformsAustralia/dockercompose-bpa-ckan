@@ -39,3 +39,6 @@
 	path = ckanext-laissezpasser
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-laissezpasser.git
 	branch = main
+[submodule "ckanext-drs"]
+	path = ckanext-drs
+	url = ssh://git@github.com/BioplatformsAustralia/ckanext-drs.git
