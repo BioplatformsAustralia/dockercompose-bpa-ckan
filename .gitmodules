@@ -42,3 +42,6 @@
 [submodule "ckanext-drs"]
 	path = ckanext-drs
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-drs.git
+[submodule "ckanext-oidc-pkce"]
+	path = ckanext-oidc-pkce
+	url = git@github.com:DataShades/ckanext-oidc-pkce.git
