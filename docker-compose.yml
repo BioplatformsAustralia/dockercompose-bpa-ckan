@@ -90,6 +90,7 @@ services:
       - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
       - CKAN_API_KEY=${CKAN_API_KEY}
       - CKAN_SITE_URL=${CKAN_SITE_URL:-https://localhost:8443/}
+      - CKAN_REDIS_URL=${CKAN_REDIS_URL:-redis://redis:6379/1}
       - LOCAL_DEV=yes
       - S3FILESTORE_CHECK_ACCESS_ON_STARTUP=false
       - SMTP_SERVER=mailcatcher:1025
@@ -133,6 +134,14 @@ services:
       - "1025:1025"
     networks:
       - bpa
+
+  redis:
+    image: redis:${REDIS_VERSION}
+    networks:
+      - bpa
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "redis-cli", "-e", "QUIT"]
 
 volumes:
   solr8:
