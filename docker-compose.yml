@@ -88,7 +88,7 @@ services:
       - BPAOTU_AUTH_SECRET_KEY=${BPAOTU_AUTH_SECRET_KEY}
       - LOCAL_CKAN_API_URL=${LOCAL_CKAN_API_URL}
       - CKAN_API_KEY=${CKAN_API_KEY}
-      - CKAN_SITE_URL=${CKAN_SITE_URL:-https://localhost:8443/}
+      - CKAN_SITE_URL=${CKAN_SITE_URL:-https://aaidemo.bioplatforms.com/}
       - LOCAL_DEV=yes
       - S3FILESTORE_CHECK_ACCESS_ON_STARTUP=false
       - SMTP_SERVER=mailcatcher:1025
