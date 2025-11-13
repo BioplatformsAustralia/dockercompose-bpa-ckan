@@ -42,3 +42,6 @@
 [submodule "ckanext-drs"]
 	path = ckanext-drs
 	url = ssh://git@github.com/BioplatformsAustralia/ckanext-drs.git
+[submodule "ckanext-aup"]
+	path = ckanext-aup
+	url = ssh://git@github.com/BioplatformsAustralia/ckanext-aup.git
